@@ -11,7 +11,11 @@ pipeline {
                 sh label:'Maven Build of jar file', script:'''mvn test'''
         }
     }
-
+stage('Jacoco Coverage Report') {
+       steps{
+        jacoco()
+        }
+    }  
     stage('Clover Analysis')
     {
         steps{
