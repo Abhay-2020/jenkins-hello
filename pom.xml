@@ -45,6 +45,14 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs -->
+		<dependency>
+		    <groupId>com.github.spotbugs</groupId>
+		    <artifactId>spotbugs</artifactId>
+		    <version>4.0.1</version>
+		    <type>pom</type>
+		</dependency>
 	</dependencies>
 
 	<build>
