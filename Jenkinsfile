@@ -31,7 +31,8 @@ pipeline {
     {
         steps{
            sh "mvn clean clover:setup test clover:aggregate clover:clover"
-           def mvnHome = tool 'maven3'
+          step([ 
+            def mvnHome = tool 'maven3'
 
             sh "${mvnHome}/bin/mvn -batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs"
 
@@ -49,6 +50,7 @@ pipeline {
 
             def spotbugs = scanForIssues tool: [$class: 'SpotBugs'], pattern: '**/target/spotbugsXml.xml'
             publishIssues issues:[spotbugs]
+            ])
         }
     }
 
