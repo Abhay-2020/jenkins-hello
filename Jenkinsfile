@@ -32,8 +32,8 @@ pipeline {
         steps{
            sh "mvn clean clover:setup test clover:aggregate clover:clover"
           step([ 
-            def mvnHome = tool 'maven3'
-            sh "${mvnHome}/bin/mvn -batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs"
+            //def mvnHome = tool 'maven3'
+            sh "maven3/bin/mvn -batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs"
           ])
           step([
             def checkstyle = scanForIssues tool: [$class: 'CheckStyle'], pattern: '**/target/checkstyle-result.xml'
