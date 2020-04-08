@@ -33,21 +33,25 @@ pipeline {
            sh "mvn clean clover:setup test clover:aggregate clover:clover"
           step([ 
             def mvnHome = tool 'maven3'
-
             sh "${mvnHome}/bin/mvn -batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs"
-
+          ])
+          step([
             def checkstyle = scanForIssues tool: [$class: 'CheckStyle'], pattern: '**/target/checkstyle-result.xml'
             publishIssues issues:[checkstyle]
-
+           ])
+          step([
             def pmd = scanForIssues tool: [$class: 'Pmd'], pattern: '**/target/pmd.xml'
             publishIssues issues:[pmd]
-
+          ])
+          step([
             def cpd = scanForIssues tool: [$class: 'Cpd'], pattern: '**/target/cpd.xml'
             publishIssues issues:[cpd]
-
+          ])
+          step([
             def findbugs = scanForIssues tool: [$class: 'FindBugs'], pattern: '**/target/findbugsXml.xml'
             publishIssues issues:[findbugs]
-
+           ])
+          step([
             def spotbugs = scanForIssues tool: [$class: 'SpotBugs'], pattern: '**/target/spotbugsXml.xml'
             publishIssues issues:[spotbugs]
             ])
